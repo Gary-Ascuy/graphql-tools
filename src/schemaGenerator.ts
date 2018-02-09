@@ -43,6 +43,7 @@ import {
   UnitOrList,
 } from './Interfaces';
 
+import { visitDirectives } from './directives';
 import { deprecated } from 'deprecated-decorator';
 import mergeDeep from './mergeDeep';
 
@@ -105,6 +106,10 @@ function _generateSchema(
   if (directiveResolvers) {
     attachDirectiveResolvers(schema, directiveResolvers);
   }
+
+  visitDirectives(schema, (name, args, type) => {
+    console.log(name, args, type);
+  });
 
   return schema;
 }
